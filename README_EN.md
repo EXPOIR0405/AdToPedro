@@ -6,6 +6,12 @@
 
 English | [Korean](README.md)
 
+## Introduction
+This Chrome extension transforms web advertisements into images of Pedro Pascal, bringing joy to your web browsing experience. Say goodbye to boring ads and hello to everyone's favorite actor!
+
+## Note
+Please be aware that some websites may experience scrolling issues. As there are no immediate plans for updates, I recommend removing the extension if these bugs significantly impact your browsing experience.
+
 ## Features
 - Automatically replaces web ads with fun Pedro Pascal GIFs
 - Small ads automatically change to different Pedro images every 30 seconds
