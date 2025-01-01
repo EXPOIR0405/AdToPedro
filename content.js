@@ -7,7 +7,7 @@ const pedroImages = [
   chrome.runtime.getURL("images/pedro5.gif"),
   chrome.runtime.getURL("images/pedro6.gif"),
   chrome.runtime.getURL("images/pedro7.gif"),
-  chrome.runtime.getURL("images/pedro8.jpg"),
+  chrome.runtime.getURL("images/pedro8.gif"),
   chrome.runtime.getURL("images/pedro9.gif"),
   chrome.runtime.getURL("images/pedro10.gif"),
   chrome.runtime.getURL("images/pedro11.gif"),
