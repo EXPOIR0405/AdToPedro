@@ -1,0 +1,14 @@
+/* 광고를 대체할 때 깔끔하게 처리 */
+div {
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+  

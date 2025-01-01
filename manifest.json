@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Ad to Pedro",
+    "version": "1.0",
+    "description": "Replace ads with Pedro Pascal images",
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["images/*"],
+        "matches": ["<all_urls>"]
+      }
+    ]
+}
+  
