@@ -80,30 +80,69 @@ const adSelectors = [
 ];
 
 function isLikelyAd(element) {
-  // AMP 광고 요소 확인
-  if (element.tagName && element.tagName.toLowerCase().startsWith('amp-')) {
+  // YouTube 동영상 플레이어와 광고 영역 제외
+  if (element.closest('#player') || 
+      element.closest('.html5-video-player') || 
+      element.closest('.ytp-ad-player-overlay') ||
+      element.closest('.ytp-ad-overlay-container')) {
+    return false;
+  }
+
+  // 한겨레 특정 광고 선택자 추가 (정확한 클래스명 사용)
+  if (element.closest('.BaseAd_adWrapper__kTNSx') ||
+      element.closest('.BaseAd_showText__ams9u') ||
+      element.closest('.BaseAd_adInner__AFsOK') ||
+      element.closest('div[class^="BaseAd_"]') ||  // BaseAd_로 시작하는 모든 클래스
+      element.closest('script[src*="/RealMedia/ads/"]') ||
+      element.closest('a[href*="/RealMedia/ads/"]')) {
+    return true;
+  }
+
+  // AdSense 광고 요소 확인
+  if (element.tagName === 'INS' && element.classList.contains('adsbygoogle')) {
     return true;
   }
   
+  if (element.closest('.adsbygoogle') ||
+      element.closest('ins.adsbygoogle') ||
+      element.closest('[data-ad-client]') ||
+      element.closest('[data-ad-slot]') ||
+      element.closest('script[src*="show_ads.js"]') ||
+      element.closest('script[src*="adsbygoogle.js"]')) {
+    return true;
+  }
+
+  // 모바일 특화 광고 선택자
+  if (element.closest('.mobile-ad') ||
+      element.closest('[class*="ad-mobile"]') ||
+      element.closest('[id*="mobile-ad"]') ||
+      element.closest('[class*="m_ad"]') ||
+      element.closest('.ad-wrapper-mobile')) {
+    return true;
+  }
+
+  // 기존 광고 감지 로직
   const style = window.getComputedStyle(element);
   const rect = element.getBoundingClientRect();
   
-  // 헤더나 네비게이션 영역 제외
   if (element.closest('header') || element.closest('nav')) {
     return false;
   }
   
-  // 최소 크기 확인 (너무 작은 요소 제외)
   if (rect.width < 100 || rect.height < 50) {
     return false;
   }
   
-  // 일반적인 광고 크기 확인
   if (rect.width > window.innerWidth * 0.9 || rect.height > window.innerHeight * 0.9) {
     return false;
   }
 
-  return true;
+  // AdSense 관련 속성 확인
+  const hasAdAttributes = element.hasAttribute('data-ad-client') || 
+                         element.hasAttribute('data-ad-slot') ||
+                         element.getAttribute('id')?.includes('google_ads');
+
+  return hasAdAttributes || element.tagName === 'INS';
 }
 
 // 이미지 교체 시간 관리를 위한 변수
